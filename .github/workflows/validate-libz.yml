@@ -1,0 +1,17 @@
+name: Validate libz-sys security update
+on:
+  push:
+    branches: [test/libz-sys-advisory]
+permissions:
+  contents: read
+jobs:
+  deny:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run all cargo-deny checks
+        uses: EmbarkStudios/cargo-deny-action@3c6349835b2b7b196a839186cb8b78e02f7b5f25 # v2
+        with:
+          arguments: ''
+          command: check
